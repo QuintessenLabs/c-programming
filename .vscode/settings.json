@@ -1,0 +1,11 @@
+{
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500,
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.runSelection": false,
+    "code-runner.executorMap": {
+        "c": "cls ; $env:Path = [Environment]::GetEnvironmentVariable('Path', 'User') + ';' + $env:Path ; if (!(Test-Path output)) { mkdir output | Out-Null } ; gcc \"$fileName\" -o \"output/$fileNameWithoutExt\" ; ./\"output/$fileNameWithoutExt\""
+    }
+}
