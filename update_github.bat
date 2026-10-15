@@ -1,7 +1,7 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal
 
-:: Move to the repository folder
+:: Move to the repository folder where this script lives
 cd /d "%~dp0"
 
 echo ===================================================
@@ -9,24 +9,27 @@ echo           Updating GitHub Repository
 echo ===================================================
 echo.
 
-:: Check current git status
 echo [1/4] Checking changed files...
 git status -s
 echo.
 
-:: Prompt for commit message (or use default with timestamp)
-set /p commit_msg="Enter commit message (Press Enter for 'Auto update: %date% %time%'): "
+:: Set a reliable default message first
+set "commit_msg=Update %date% %time%"
 
-if "%commit_msg%"=="" (
-    set commit_msg=Auto update: %date% %time%
+:: Ask user for custom message
+set "user_input="
+set /p "user_input=Enter commit message (Press Enter for default): "
+
+if defined user_input (
+    set "commit_msg=%user_input%"
 )
 
 echo.
-echo [2/4] Staging files (git add .)...
-git add .
+echo [2/4] Staging all changes (git add -A)...
+git add -A
 
 echo.
-echo [3/4] Committing changes...
+echo [3/4] Committing changes with message: "%commit_msg%"
 git commit -m "%commit_msg%"
 
 echo.
@@ -40,10 +43,9 @@ if %errorlevel% equ 0 (
     echo ===================================================
 ) else (
     echo ===================================================
-    echo    ERROR: Push failed! Check your connection or git credentials.
+    echo    ERROR: Push or commit failed.
     echo ===================================================
 )
 
 echo.
 pause
-
