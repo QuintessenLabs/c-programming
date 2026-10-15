@@ -6,6 +6,6 @@
     "code-runner.clearPreviousOutput": true,
     "code-runner.runSelection": false,
     "code-runner.executorMap": {
-        "c": "cls ; $env:Path = [Environment]::GetEnvironmentVariable('Path', 'User') + ';' + $env:Path ; if (!(Test-Path output)) { mkdir output | Out-Null } ; gcc \"$fileName\" -o \"output/$fileNameWithoutExt\" ; ./\"output/$fileNameWithoutExt\""
+        "c": "cls ; Stop-Process -Name \"$fileNameWithoutExt\" -Force -ErrorAction SilentlyContinue ; $env:Path = [Environment]::GetEnvironmentVariable('Path', 'User') + ';' + $env:Path ; if (!(Test-Path output)) { mkdir output | Out-Null } ; gcc \"$fileName\" -o \"output/$fileNameWithoutExt\" ; ./\"output/$fileNameWithoutExt\""
     }
 }
