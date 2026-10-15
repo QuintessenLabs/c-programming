@@ -10,7 +10,7 @@ echo ===================================================
 echo.
 
 echo [1/4] Checking changed files...
-git status -s
+call git status -s
 echo.
 
 :: Set a reliable default message first
@@ -26,15 +26,15 @@ if defined user_input (
 
 echo.
 echo [2/4] Staging all changes (git add -A)...
-git add -A
+call git add -A
 
 echo.
 echo [3/4] Committing changes with message: "%commit_msg%"
-git commit -m "%commit_msg%"
+call git commit -m "%commit_msg%"
 
 echo.
 echo [4/4] Pushing to GitHub (origin main)...
-git push origin main
+call git push origin main
 
 echo.
 if %errorlevel% equ 0 (
@@ -43,9 +43,10 @@ if %errorlevel% equ 0 (
     echo ===================================================
 ) else (
     echo ===================================================
-    echo    ERROR: Push or commit failed.
+    echo    Notice: Nothing to push or an error occurred.
     echo ===================================================
 )
 
 echo.
-pause
+echo Press any key to exit...
+pause >nul
