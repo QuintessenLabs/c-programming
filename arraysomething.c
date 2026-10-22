@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    int marks[5], i;
+    int marks[100], i,n;
 
     for (i = 0; i <= 4; i++)
     {
@@ -10,7 +10,7 @@ int main() {
     }
 
     printf("marks entered by user\n= ");
-    for (i = 4; i >= 0; i--)
+    for (i = 0; i<n; i++)
     {
         printf("%d\t", marks[i]);
     }
